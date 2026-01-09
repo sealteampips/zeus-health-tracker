@@ -1,6 +1,12 @@
+import { useState, useRef } from 'react';
 import { statusColors, severityColors, getMedicationsForIssue, getVisitsForIssue } from '../data/zeusData';
 
 export default function DetailPanel({ issue, onClose }) {
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+  const startY = useRef(0);
+  const modalRef = useRef(null);
+
   if (!issue) return null;
 
   const medications = getMedicationsForIssue(issue.id);
@@ -14,33 +20,71 @@ export default function DetailPanel({ issue, onClose }) {
     });
   };
 
+  // Swipe to dismiss handlers
+  const handleTouchStart = (e) => {
+    startY.current = e.touches[0].clientY;
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDragging) return;
+    const currentY = e.touches[0].clientY;
+    const diff = currentY - startY.current;
+    // Only allow dragging down
+    if (diff > 0) {
+      setDragOffset(diff);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    // If dragged more than 100px, close the modal
+    if (dragOffset > 100) {
+      onClose();
+    }
+    setDragOffset(0);
+  };
+
   return (
-    <div className="fixed inset-0 sm:inset-auto sm:right-0 sm:top-0 sm:h-full sm:w-96 bg-dark-card border-l border-dark-border shadow-2xl z-50 flex flex-col max-h-[100dvh] sm:max-h-full">
-      {/* Header - Always visible */}
-      <div className="flex-shrink-0 bg-dark-card border-b border-dark-border p-4 sm:p-4">
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
-              <div
-                className="w-3 h-3 rounded-full flex-shrink-0"
-                style={{ backgroundColor: statusColors[issue.status] }}
-              />
-              <span className="text-xs uppercase tracking-wide text-gray-400">
-                {issue.status}
-              </span>
-            </div>
-            <h2 className="text-lg sm:text-xl font-bold text-white">{issue.title}</h2>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-2.5 bg-dark-bg hover:bg-dark-border active:bg-dark-border rounded-lg transition-colors flex-shrink-0"
-            aria-label="Close"
-          >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+    <div
+      ref={modalRef}
+      className="fixed inset-x-0 bottom-0 sm:inset-auto sm:right-0 sm:top-0 sm:h-full sm:w-96 bg-dark-card sm:border-l border-dark-border shadow-2xl z-50 flex flex-col max-h-[80vh] sm:max-h-full rounded-t-2xl sm:rounded-none"
+      style={{
+        transform: `translateY(${dragOffset}px)`,
+        transition: isDragging ? 'none' : 'transform 0.2s ease-out'
+      }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Drag handle - mobile only */}
+      <div className="sm:hidden flex justify-center pt-3 pb-1">
+        <div className="w-10 h-1 bg-gray-600 rounded-full" />
+      </div>
+
+      {/* Close button - large and always visible on mobile */}
+      <button
+        onClick={onClose}
+        className="absolute top-3 right-3 sm:top-4 sm:right-4 w-11 h-11 sm:w-10 sm:h-10 bg-dark-bg hover:bg-dark-border active:bg-dark-border rounded-full transition-colors flex items-center justify-center z-10 border border-dark-border sm:border-0"
+        aria-label="Close"
+      >
+        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      {/* Header */}
+      <div className="flex-shrink-0 bg-dark-card border-b border-dark-border px-4 pt-2 pb-4 sm:p-4 pr-16 sm:pr-16">
+        <div className="flex items-center gap-2 mb-1">
+          <div
+            className="w-3 h-3 rounded-full flex-shrink-0"
+            style={{ backgroundColor: statusColors[issue.status] }}
+          />
+          <span className="text-xs uppercase tracking-wide text-gray-400">
+            {issue.status}
+          </span>
         </div>
+        <h2 className="text-lg sm:text-xl font-bold text-white">{issue.title}</h2>
       </div>
 
       {/* Content - Scrollable */}
