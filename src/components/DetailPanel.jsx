@@ -15,9 +15,9 @@ export default function DetailPanel({ issue, onClose }) {
   };
 
   return (
-    <div className="fixed right-0 top-0 h-full w-full sm:w-96 bg-dark-card border-l border-dark-border shadow-2xl z-50 overflow-y-auto">
-      {/* Header */}
-      <div className="sticky top-0 bg-dark-card border-b border-dark-border p-3 sm:p-4 z-10">
+    <div className="fixed inset-0 sm:inset-auto sm:right-0 sm:top-0 sm:h-full sm:w-96 bg-dark-card border-l border-dark-border shadow-2xl z-50 flex flex-col max-h-[100dvh] sm:max-h-full">
+      {/* Header - Always visible */}
+      <div className="flex-shrink-0 bg-dark-card border-b border-dark-border p-4 sm:p-4">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
@@ -33,17 +33,17 @@ export default function DetailPanel({ issue, onClose }) {
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-dark-border active:bg-dark-border rounded-lg transition-colors flex-shrink-0"
+            className="p-2 hover:bg-dark-border active:bg-dark-border rounded-lg transition-colors flex-shrink-0 -mt-1"
           >
-            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="p-3 sm:p-4 space-y-4 sm:space-y-6 pb-8">
+      {/* Content - Scrollable */}
+      <div className="flex-1 overflow-y-auto p-4 sm:p-4 space-y-4 sm:space-y-6" style={{ paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom))' }}>
         {/* Overview */}
         <section>
           <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-2 sm:mb-3">Overview</h3>
