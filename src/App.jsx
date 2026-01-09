@@ -120,9 +120,9 @@ function App() {
 
   return (
     <div className="min-h-screen bg-dark-bg text-gray-100">
-      {/* Header - Mobile optimized */}
+      {/* Header - Mobile optimized with safe area padding */}
       <header className="bg-dark-card border-b border-dark-border sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-4">
           <div className="flex items-center justify-between gap-3">
             {/* Pet info */}
             <div className="flex items-center gap-3">
@@ -252,7 +252,7 @@ function App() {
 
             {/* Issue Quick List - Scrollable on mobile (hide when calibrating) */}
             {!calibrationMode && (
-              <div className="bg-dark-card rounded-xl border border-dark-border p-3 sm:p-4 mt-6 sm:mt-0">
+              <div className="bg-dark-card rounded-xl border border-dark-border p-3 sm:p-4 mt-8 sm:mt-0">
                 <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-2 sm:mb-3">
                   Health Issues ({filteredIssues.length})
                 </h3>
