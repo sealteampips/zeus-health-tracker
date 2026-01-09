@@ -252,11 +252,14 @@ function App() {
 
             {/* Issue Quick List - Scrollable on mobile (hide when calibrating) */}
             {!calibrationMode && (
-              <div className="bg-dark-card rounded-xl border border-dark-border p-4 sm:p-4 mt-10 sm:mt-0 border-t-2 border-t-dark-border">
-                <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3 sm:mb-3">
-                  Health Issues ({filteredIssues.length})
-                </h3>
-                <div className="space-y-2 max-h-[180px] sm:max-h-[200px] overflow-y-auto">
+              <div className="mt-8 sm:mt-0">
+                {/* Section Header - visible separator on mobile */}
+                <div className="border-t border-dark-border pt-6 sm:pt-0 sm:border-t-0">
+                  <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-4 px-1">
+                    Health Issues ({filteredIssues.length})
+                  </h3>
+                </div>
+                <div className="bg-dark-card rounded-xl border border-dark-border p-4 space-y-2 max-h-[200px] sm:max-h-[200px] overflow-y-auto">
                   {filteredIssues.map((issue) => (
                     <button
                       key={issue.id}
