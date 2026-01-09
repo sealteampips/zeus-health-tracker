@@ -160,7 +160,7 @@ function App() {
       <main className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-4 sm:gap-6">
           {/* 3D Viewer Section */}
-          <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-4 sm:space-y-4">
             {/* Controls */}
             <div className="flex items-center justify-between flex-wrap gap-2">
               <h2 className="text-base sm:text-lg font-semibold text-white">3D Health Map</h2>
@@ -252,7 +252,7 @@ function App() {
 
             {/* Issue Quick List - Scrollable on mobile (hide when calibrating) */}
             {!calibrationMode && (
-              <div className="bg-dark-card rounded-xl border border-dark-border p-3 sm:p-4">
+              <div className="bg-dark-card rounded-xl border border-dark-border p-3 sm:p-4 mt-4 sm:mt-0">
                 <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-2 sm:mb-3">
                   Health Issues ({filteredIssues.length})
                 </h3>

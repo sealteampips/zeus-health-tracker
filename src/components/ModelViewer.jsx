@@ -239,7 +239,7 @@ export default function ModelViewer({
   };
 
   return (
-    <div className={`relative w-full h-full min-h-[350px] bg-dark-card rounded-xl overflow-hidden border ${calibrationMode ? 'border-purple-500' : 'border-dark-border'} touch-none`}>
+    <div className={`relative w-full h-full min-h-[350px] bg-dark-card rounded-xl overflow-hidden border ${calibrationMode ? 'border-purple-500' : 'border-dark-border'}`} style={{ touchAction: 'none' }}>
       <Canvas shadows>
         {/* Camera positioned for 3/4 front-left view */}
         <PerspectiveCamera makeDefault position={cameraPosition} fov={45} />
@@ -285,8 +285,8 @@ export default function ModelViewer({
           maxPolarAngle={Math.PI / 1.5}
           target={[0, 0, 0]}
           touches={{
-            ONE: 1, // ROTATE
-            TWO: 2  // DOLLY_PAN
+            ONE: THREE.TOUCH.ROTATE,
+            TWO: THREE.TOUCH.DOLLY_PAN
           }}
         />
         <Environment preset="studio" />

@@ -17,23 +17,23 @@ export const bodyParts = [
   { id: 'abdomen', label: 'Abdomen', category: 'body' },
 ];
 
-// Default positions for placeholder model (fallback if not calibrated)
+// Default positions calibrated for Zeus 3D model
 export const defaultPositions = {
-  'front-left-paw': [-0.15, -0.38, 0.2],
-  'front-right-paw': [0.15, -0.38, 0.2],
-  'back-left-leg': [-0.15, -0.3, -0.2],
-  'back-right-leg': [0.15, -0.3, -0.2],
-  'left-eye': [-0.08, 0.22, 0.48],
-  'right-eye': [0.08, 0.22, 0.48],
-  'left-ear': [-0.12, 0.38, 0.28],
-  'right-ear': [0.12, 0.38, 0.28],
-  'mouth-gum': [0, 0.12, 0.52],
-  'head-top': [0, 0.4, 0.3],
-  'nose': [0, 0.15, 0.58],
-  'chest': [0, -0.05, 0.25],
-  'back-spine': [0, 0.1, -0.1],
-  'tail': [0, 0.08, -0.45],
-  'abdomen': [0, -0.15, 0],
+  'front-left-paw': [0.26, -0.67, 0.17],
+  'front-right-paw': [-0.22, -0.67, 0.18],
+  'back-left-leg': [0.25, -0.48, -0.28],
+  'back-right-leg': [-0.22, -0.45, -0.28],
+  'left-eye': [0.12, 0.08, 0.32],
+  'right-eye': [-0.10, 0.08, 0.32],
+  'left-ear': [0.22, 0.30, 0.05],
+  'right-ear': [-0.20, 0.30, 0.05],
+  'mouth-gum': [0.0, -0.12, 0.38],
+  'head-top': [0.0, 0.32, 0.12],
+  'nose': [0.0, -0.02, 0.42],
+  'chest': [0.0, -0.35, 0.22],
+  'back-spine': [0.0, -0.15, -0.18],
+  'tail': [0.0, -0.32, -0.38],
+  'abdomen': [0.0, -0.52, 0.0],
 };
 
 // Get body part by ID
