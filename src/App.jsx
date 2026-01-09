@@ -252,7 +252,7 @@ function App() {
 
             {/* Issue Quick List - Scrollable on mobile (hide when calibrating) */}
             {!calibrationMode && (
-              <div className="bg-dark-card rounded-xl border border-dark-border p-3 sm:p-4 mt-4 sm:mt-0">
+              <div className="bg-dark-card rounded-xl border border-dark-border p-3 sm:p-4 mt-6 sm:mt-0">
                 <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-2 sm:mb-3">
                   Health Issues ({filteredIssues.length})
                 </h3>

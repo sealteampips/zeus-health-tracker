@@ -53,17 +53,17 @@ export default function Hotspot({ issue, position, color, onClick, isSelected })
     }
   });
 
-  // Size reduced by 20%
-  const baseSize = 0.048; // Was 0.06
-  const ringInner = 0.064; // Was 0.08
-  const ringOuter = 0.08; // Was 0.1
+  // Size increased by 30% for better visibility on mobile
+  const baseSize = 0.062;
+  const ringInner = 0.083;
+  const ringOuter = 0.104;
 
   return (
     <group ref={groupRef} position={position}>
       {/* White outline ring for contrast */}
       <Billboard>
         <mesh renderOrder={1}>
-          <ringGeometry args={[ringOuter, ringOuter + 0.016, 32]} />
+          <ringGeometry args={[ringOuter, ringOuter + 0.021, 32]} />
           <meshBasicMaterial
             color="#ffffff"
             transparent
